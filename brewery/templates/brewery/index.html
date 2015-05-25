@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="favicon.ico" rel="shortcut icon">
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css"
+  href="{% static 'brewery/style.css' %}" />
+<title></title>
+<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<script type="text/javascript">
+	function hlt_slider(val) {
+		document.getElementById('hlt_temp_slider_text').value = val;
+	}
+	function mash_slider(val) {
+		document.getElementById('mash_temp_slider_text').value = val;
+	}
+	function power_slider(val) {
+		document.getElementById('coil_power-slider').value = val;
+	}
+</script>
+<body>
+  <div class="container">
+
+    <header class="header clearfix">
+      <div class="logo">.BrewDuino</div>
+
+      <nav class="menu_main">
+        <ul>
+          <p>Control Panel</p>
+        </ul>
+      </nav>
+    </header>
+
+
+    <div class="info">
+      <article class="hero clearfix">
+        <div class="col_100">
+          <h1>{{ brewery_name }}</h1>
+          <p>Arduino Powered, Triac Controlled, Web Server for
+            Brewing Beer
+        </div>
+      </article>
+      <div class="container">
+        <h1>Controls</h1>
+
+        <form action="{% url 'brewery:index' %}" method="post">
+          {% csrf_token %} <label>System On
+            <div class="onoffswitch">
+              <input type="checkbox" name="main_power"
+                class="onoffswitch-checkbox" id="maincontrol"
+                value=1  {{ settings.main_power }}> <label
+                class="onoffswitch-label" for="maincontrol"> <span
+                class="onoffswitch-inner"></span> <span
+                class="onoffswitch-switch"></span>
+              </label>
+            </div>
+          </label> <label> Heating Coil Unlocked
+            <div class="onoffswitch">
+              <input type="checkbox" name="coil_unlocked"
+                class="onoffswitch-checkbox" id="coilunlocked"
+                value=1 {{settings.coil_unlocked }}> <label
+                class="onoffswitch-label" for="coilunlocked"> <span
+                class="onoffswitch-inner"></span> <span
+                class="onoffswitch-switch"></span>
+              </label>
+            </div>
+          </label> <label> Pump Unlocked
+            <div class="onoffswitch">
+              <input type="checkbox" name="pump_unlocked"
+                class="onoffswitch-checkbox" id="pumpunlocked"
+                value=1 {{ settings.pump_unlocked }}> <label
+                class="onoffswitch-label" for="pumpunlocked"> <span
+                class="onoffswitch-inner"></span> <span
+                class="onoffswitch-switch"></span>
+              </label>
+            </div>
+          </label>
+          <div>
+
+            <div class="clearfix"></div>
+
+
+            <h3>Control Mode</h3>
+            <input type="radio" name="control_mode" id="manual"
+              class="radio" value=3 {{settings.control_mode.manual}}/>
+            <label for="manual">Manual</label> <input type="radio"
+              name="control_mode" id="autohlt" class="radio"
+              value=1 {{settings.control_mode.autohlt}} /> <label
+              for="autohlt">Auto HLT / Boil </label> <input type="radio"
+              name="control_mode" id="automash" class="radio"
+              value=2 {{settings.control_mode.automash}}/> <label
+              for="automash">Auto Mash </label> <input type="radio"
+              name="control_mode" id="coil_off" class="radio"
+              value=0 {{settings.control_mode.off}}/> <label
+              for="coil_off">Off </label>
+
+            <div class="clearfix"></div>
+            <div>
+              <h3>Pump Mode</h3>
+              <input type="radio" name="pump_mode" id="pump_auto"
+                class="radio" value=2 {{settings.pump.auto}}/>
+              <label for="pump_auto">Auto</label> <input type="radio"
+                name="pump_mode" id="pump_on" class="radio" value=1 {{settings.pump.on}} />
+              <label for="pump_on">On</label> <input type="radio"
+                name="pump_mode" id="pump_off" class="radio" value=0 {{settings.pump.off}}/>
+              <label for="pump_off">Off</label>
+            </div>
+
+            <div class="clearfix"></div>
+            <h3>Temperatures</h3>
+            <div>
+              <label> Stream <input type="text"
+                class=temperature-label readonly id="stream_temp_text"
+                value={{settings.temperature.stream}} />
+              </label> <label> Mash <input type="text"
+                class=temperature-label readonly id="mash_temp_text"
+                value={{settings.temperature.mash}} />
+              </label> <label> HLT <input type="text"
+                class=temperature-label readonly id="hlt_temp_text"
+                value={{settings.temperature.boil}} />
+              </label>
+            </div>
+            <div class="col_50">
+
+              <h3>HLT/Boil Kettle Temperature</h3>
+              <label> Setting <input type="text"
+                class=temperature-label readonly
+                id="hlt_temp_slider_text" value={{settings.hlt_temp}} />
+              </label> <input type="range" class="slider-width" id=hlt_temp
+                name="hlt_temp" min="0" max="100"
+                value={{settings.hlt_temp}}
+                oninput="hlt_slider(this.value);">
+
+
+              <h3>Mash Tun Temperature</h3>
+              <label> Setting <input type="text"
+                class=temperature-label readonly
+                id="mash_temp_slider_text" value={{settings.mash_temp}} />
+              </label> <input type="range" class="slider-width" id=mash_temp
+                name="mash_temp" min="0" max="100"
+                value={{settings.mash_temp}}
+                oninput="mash_slider(this.value);">
+
+
+              <h3>Manual Power Level</h3>
+              <label> Setting <input type="text"
+                class=temperature-label readonly id="coil_power-slider"
+                value={{settings.power_level}} />
+
+              </label> <input type="range" class="slider-width" id=coil_power
+                name="coil_power" min="0" max="128"
+                value={{settings.power_level}}
+                oninput="power_slider(this.value);">
+            </div>
+
+            <div class="clearfix"></div>
+
+
+            <h4>Push Settings</h4>
+            <input type="submit" value="Update" />
+
+            <div class="clearfix"></div>
+        </form>
+</body>
+</html>

@@ -26,7 +26,7 @@
   <div class="container">
 
     <header class="header clearfix">
-      <div class="logo">.BrewDuino</div>
+      <div class="logo">.BrewBerryPi</div>
 
       <nav class="menu_main">
         <ul>
@@ -40,8 +40,7 @@
       <article class="hero clearfix">
         <div class="col_100">
           <h1>{{ brewery_name }}</h1>
-          <p>Arduino Powered, Triac Controlled, Web Server for
-            Brewing Beer
+          <p>Raspberry Pi Powered, Web Server for Brewing Beer
         </div>
       </article>
       <div class="container">
@@ -58,27 +57,6 @@
                 class="onoffswitch-switch"></span>
               </label>
             </div>
-          </label> <label> Heating Coil Unlocked
-            <div class="onoffswitch">
-              <input type="checkbox" name="coil_unlocked"
-                class="onoffswitch-checkbox" id="coilunlocked"
-                value=1 {{settings.coil_unlocked }}> <label
-                class="onoffswitch-label" for="coilunlocked"> <span
-                class="onoffswitch-inner"></span> <span
-                class="onoffswitch-switch"></span>
-              </label>
-            </div>
-          </label> <label> Pump Unlocked
-            <div class="onoffswitch">
-              <input type="checkbox" name="pump_unlocked"
-                class="onoffswitch-checkbox" id="pumpunlocked"
-                value=1 {{ settings.pump_unlocked }}> <label
-                class="onoffswitch-label" for="pumpunlocked"> <span
-                class="onoffswitch-inner"></span> <span
-                class="onoffswitch-switch"></span>
-              </label>
-            </div>
-          </label>
           <div>
 
             <div class="clearfix"></div>
@@ -97,18 +75,6 @@
               name="control_mode" id="coil_off" class="radio"
               value=0 {{settings.control_mode.off}}/> <label
               for="coil_off">Off </label>
-
-            <div class="clearfix"></div>
-            <div>
-              <h3>Pump Mode</h3>
-              <input type="radio" name="pump_mode" id="pump_auto"
-                class="radio" value=2 {{settings.pump.auto}}/>
-              <label for="pump_auto">Auto</label> <input type="radio"
-                name="pump_mode" id="pump_on" class="radio" value=1 {{settings.pump.on}} />
-              <label for="pump_on">On</label> <input type="radio"
-                name="pump_mode" id="pump_off" class="radio" value=0 {{settings.pump.off}}/>
-              <label for="pump_off">Off</label>
-            </div>
 
             <div class="clearfix"></div>
             <h3>Temperatures</h3>

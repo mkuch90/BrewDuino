@@ -18,24 +18,13 @@ class SSRController:
     GPIO.setup(self.SSR_PIN, GPIO.OUT)
     GPIO.setup(self.OUTLET_PIN_1, GPIO.OUT)
     GPIO.setup(self.OUTLET_PIN_2, GPIO.OUT)
-    self.PumpOff()
     self.SSROff()
-
-  def PumpOn(self):
-    GPIO.output(self.OUTLET_PIN_1, GPIO.LOW)
-    GPIO.output(self.OUTLET_PIN_2, GPIO.LOW)
-
 
   def SSROn(self):
     GPIO.output(self.SSR_PIN, GPIO.HIGH)
 
-
   def SSROff(self):
-
     GPIO.output(self.SSR_PIN, GPIO.LOW)
-
-  def PumpOff(self):
-    GPIO.output(self.OUTLET_PIN_1, GPIO.HIGH)
 
 
 

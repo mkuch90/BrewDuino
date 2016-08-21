@@ -9,9 +9,6 @@ class SSRController:
   def __init__(self):
     Log("Using Fake SSR")
 
-  def PumpOn(self):
-    Log("Pump On")
-
 
   def SSROn(self):
     Log("SSR On")
@@ -19,9 +16,6 @@ class SSRController:
 
   def SSROff(self):
     Log("SSR Off")
-
-  def PumpOff(self):
-    Log("Pump off")
 
 
 

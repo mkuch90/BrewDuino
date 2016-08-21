@@ -5,13 +5,10 @@ import time
 class BrewSettings(models.Model):
   date_time = models.FloatField(primary_key=True)
   system_on = models.IntegerField()
-  coil_unlocked = models.IntegerField()
-  pump_unlocked = models.IntegerField()
   control_mode = models.IntegerField()
   boil_temp = models.IntegerField()
   mash_temp = models.IntegerField()
   coil_power = models.IntegerField()
-  pump_setting = models.IntegerField()
 
   @staticmethod
   def GetLatest():
@@ -22,7 +19,6 @@ class BrewSettings(models.Model):
       entry.save()
     else:
       entry = entries[0]
-
     return entry
 
   @staticmethod
@@ -30,13 +26,10 @@ class BrewSettings(models.Model):
     settings = BrewSettings()
     settings.date_time = int(time.time())
     settings.system_on = False
-    settings.coil_unlocked = False
-    settings.pump_unlocked = False
     settings.control_mode = 0
     settings.boil_temp = 0
     settings.mash_temp = 0
     settings.coil_power = 0
-    settings.pump_setting = 0
     return settings
 
 class Temperature(models.Model):
@@ -72,7 +65,6 @@ class Temperature(models.Model):
 class State(models.Model):
   date_time = models.FloatField(primary_key=True)
   coil_on = models.IntegerField()
-  pump_on = models.IntegerField()
   coil_power = models.IntegerField()
 
   @staticmethod
@@ -92,7 +84,6 @@ class State(models.Model):
     settings = State()
     settings.date_time = int(time.time())
     settings.coil_on = 0
-    settings.pump_on = 0
     settings.coil_power = 0
     return settings
 
@@ -102,7 +93,3 @@ class CoilEnum:
   auto_mash = 2
   off = 0  # Default Action Safest
 
-class PumpEnum:
-  auto = 2
-  on = 1
-  off = 0  # Default Action safest

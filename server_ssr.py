@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import serial
+# import serial
 import os
 import threading
 import signal
@@ -77,10 +77,8 @@ class SSRServer:
     return
 
   def GetPower(self):
-    return self._server_state.ManageStateViaSettingsAndTemperature()
+    return self._server_state.ManageCoil()
 
-  def GetPump(self):
-    return self._server_state.IsPumpOn()
 
 
 
@@ -99,27 +97,14 @@ class Handler:
     self.server = SSRServer()
     self.ssr = ssr_controller.SSRController()
     self.HandlePower()
-    self.HandlePump()
 
 
   def Shutdown(self, signal, frame):
     self.server._running = False
-    self.ssr.PumpOff()
     self.ssr.SSROff()
     self.ssr = None  # Set to none so SSR does not turn on again.
     Log('Shutting Down')
     sys.exit(0)
-
-  def HandlePump (self):
-    if not self.server._running:
-      return
-    if(self.server.GetPump()):
-      self.ssr.PumpOn()
-    else:
-      self.ssr.PumpOff()
-
-    timer = Timer(1, self.HandlePump)
-    timer.start()
 
   def PowerOffInterrupt(self):
     self.ssr.SSROff()

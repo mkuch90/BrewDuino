@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 
 class TemperatureSensor:
   TEMPERATURE_ADDRESS_1 = "28-000004bf40cd"  # boil
-  TEMPERATURE_ADDRESS_2 = "28-000004bf8d1f"  # stream
+  TEMPERATURE_ADDRESS_2 = "28-000004bfb247"  # stream
   TEMPERATURE_ADDRESS_3 = "28-000004c068a7"  # mash
   FILE_PATH = "/sys/bus/w1/devices/{0}/w1_slave"
 

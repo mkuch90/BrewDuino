@@ -7,6 +7,8 @@ class SSRController:
 
 
   SSR_PIN = 14  # Pin for the 30A SSR used to drive high-power
+  OUTLET_PIN_1 = 15  # Pin for the 10A SSR used to drive outlet
+  OUTLET_PIN_2 = 18  # Pin for the 10A SSR used to drive second outlet
 
 
   def __init__(self):
@@ -14,6 +16,8 @@ class SSRController:
 
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(self.SSR_PIN, GPIO.OUT)
+    GPIO.setup(self.OUTLET_PIN_1, GPIO.OUT)
+    GPIO.setup(self.OUTLET_PIN_2, GPIO.OUT)
     self.SSROff()
 
   def SSROn(self):
